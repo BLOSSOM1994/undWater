@@ -144,8 +144,8 @@ class T_CNN(object):
         # Run by batch images
         
         batch_idxs = len(data_train_list) // config.batch_size[0]
-        print(batch_idxs)
-        print(len(data_train_list))
+        print(ep+1)
+        err =  np.ones(batch_idxs)
         for idx in range(0, batch_idxs):
 
           batch_files       = data_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
@@ -154,7 +154,6 @@ class T_CNN(object):
           batch_files_gc       = data_gc_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
           batch_image_files = image_train_list[idx*config.batch_size[0] : (idx+1)*config.batch_size[0]]
 
-          print('------------------------',idx)
           batch_ = [
           get_image(batch_file,
                     is_grayscale=self.is_grayscale) for batch_file in batch_files]
@@ -178,19 +177,16 @@ class T_CNN(object):
           batch_image_input = np.array(batch_labels_image).astype(np.float32)
 
           counter += 1
-          _, err = self.sess.run([self.train_op, self.loss ], feed_dict={self.images: batch_input, self.images_wb: batch_wb_input, self.images_ce: batch_ce_input, self.images_gc: batch_gc_input, self.labels_image:batch_image_input})
+          err[idx] = self.sess.run([self.train_op, self.loss ], feed_dict={self.images: batch_input, self.images_wb: batch_wb_input, self.images_ce: batch_ce_input, self.images_gc: batch_gc_input, self.labels_image:batch_image_input})
           # print(batch_light)
-          print('-----------+-+-+-----------')
           if counter % 100 == 0:
             print("Epoch: [%2d], step: [%2d], time: [%4.4f], loss: [%.8f]" \
               % ((ep+1), counter, time.time()-start_time, err ))
-          print('-----------777777777-----------')
   
           if idx  == batch_idxs-1: 
             batch_test_idxs = len(data_test_list) // config.batch_size
             err_test =  np.ones(batch_test_idxs)
             for idx_test in range(0,batch_test_idxs):
-              print('-----------888888888-----------')
 
               sample_data_files = data_train_list[idx_test*config.batch_size[0]:(idx_test+1)*config.batch_size[0]]
               sample_wb_files = data_wb_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
