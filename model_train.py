@@ -41,7 +41,7 @@ class T_CNN(object):
     self.df_dim = 64
     self.checkpoint_dir = checkpoint_dir
     self.sample_dir = sample_dir
-    self.vgg_dir='/content/drive/vgg_pretrained/imagenet-vgg-verydeep-19.mat'
+    self.vgg_dir='/content/drive/MyDrive/vgg_pretrained/imagenet-vgg-verydeep-19.mat'
     self.CONTENT_LAYER = 'relu5_4'
     self.build_model()
 
@@ -73,18 +73,18 @@ class T_CNN(object):
     self.saver = tf.train.Saver(max_to_keep=0)
     
   def train(self, config):
-    if config.is_train:     
-      data_train_list = prepare_data(self.sess, dataset="input_train")
-      data_wb_train_list = prepare_data(self.sess, dataset="input_wb_train")
-      data_ce_train_list = prepare_data(self.sess, dataset="input_ce_train")
-      data_gc_train_list = prepare_data(self.sess, dataset="input_gc_train")
-      image_train_list = prepare_data(self.sess, dataset="gt_train")
+    if config.is_train[0]:     
+      data_train_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_train")
+      data_wb_train_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_wb_train")
+      data_ce_train_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_ce_train")
+      data_gc_train_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_gc_train")
+      image_train_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/gt_train")
 
-      data_test_list = prepare_data(self.sess, dataset="input_test")
-      data_wb_test_list = prepare_data(self.sess, dataset="input_wb_test")
-      data_ce_test_list = prepare_data(self.sess, dataset="input_ce_test")
-      data_gc_test_list = prepare_data(self.sess, dataset="input_gc_test")
-      image_test_list = prepare_data(self.sess, dataset="gt_test")
+      data_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_test")
+      data_wb_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_wb_test")
+      data_ce_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_ce_test")
+      data_gc_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_gc_test")
+      image_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/gt_test")
 
       seed = 568
       np.random.seed(seed)
@@ -99,11 +99,11 @@ class T_CNN(object):
       np.random.shuffle(image_train_list)
 
     else:
-      data_test_list = prepare_data(self.sess, dataset="input_test")
-      data_wb_test_list = prepare_data(self.sess, dataset="input_wb_test")
-      data_ce_test_list = prepare_data(self.sess, dataset="input_ce_test")
-      data_gc_test_list = prepare_data(self.sess, dataset="input_gc_test")
-      image_test_list = prepare_data(self.sess, dataset="gt_test")
+      data_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_test")
+      data_wb_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_wb_test")
+      data_ce_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_ce_test")
+      data_gc_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/input_gc_test")
+      image_test_list = prepare_data(self.sess, dataset="/content/drive/MyDrive/waternetDataSets/gt_test")
 
 
 
@@ -124,7 +124,7 @@ class T_CNN(object):
     sample_inputs_lable_image = np.array(sample_lable_image).astype(np.float32)
 
 
-    self.train_op = tf.train.AdamOptimizer(config.learning_rate,0.9).minimize(self.loss)
+    self.train_op = tf.train.AdamOptimizer(config.learning_rate[0],0.9).minimize(self.loss)
     tf.global_variables_initializer().run()
     
     
@@ -136,21 +136,21 @@ class T_CNN(object):
     else:
       print(" [!] Load failed...")
 
-    if config.is_train:
+    if config.is_train[0]:
       print("Training...")
-      loss = np.ones(config.epoch)
+      loss = np.ones(config.epoch[0])
 
-      for ep in range(config.epoch):
+      for ep in range(config.epoch[0]):
         # Run by batch images
         
-        batch_idxs = len(data_train_list) // config.batch_size
+        batch_idxs = len(data_train_list) // config.batch_size[0]
         for idx in range(0, batch_idxs):
 
-          batch_files       = data_train_list[idx*config.batch_size:(idx+1)*config.batch_size]
-          batch_files_wb       = data_wb_train_list[idx*config.batch_size:(idx+1)*config.batch_size]
-          batch_files_ce       = data_ce_train_list[idx*config.batch_size:(idx+1)*config.batch_size]
-          batch_files_gc       = data_gc_train_list[idx*config.batch_size:(idx+1)*config.batch_size]
-          batch_image_files = image_train_list[idx*config.batch_size : (idx+1)*config.batch_size]
+          batch_files       = data_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
+          batch_files_wb       = data_wb_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
+          batch_files_ce       = data_ce_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
+          batch_files_gc       = data_gc_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
+          batch_image_files = image_train_list[idx*config.batch_size[0] : (idx+1)*config.batch_size[0]]
 
 
           batch_ = [
@@ -188,11 +188,11 @@ class T_CNN(object):
             err_test =  np.ones(batch_test_idxs)
             for idx_test in range(0,batch_test_idxs):
 
-              sample_data_files = data_train_list[idx_test*config.batch_size:(idx_test+1)*config.batch_size]
-              sample_wb_files = data_wb_train_list[idx_test*config.batch_size : (idx_test+1)*config.batch_size]
-              sample_ce_files = data_ce_train_list[idx_test*config.batch_size : (idx_test+1)*config.batch_size]
-              sample_gc_files = data_gc_train_list[idx_test*config.batch_size : (idx_test+1)*config.batch_size]
-              sample_image_files = image_train_list[idx_test*config.batch_size : (idx_test+1)*config.batch_size]
+              sample_data_files = data_train_list[idx_test*config.batch_size[0]:(idx_test+1)*config.batch_size[0]]
+              sample_wb_files = data_wb_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
+              sample_ce_files = data_ce_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
+              sample_gc_files = data_gc_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
+              sample_image_files = image_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
              
               sample_data = [get_image(sample_data_file,
                             is_grayscale=self.is_grayscale) for sample_data_file in sample_data_files]
@@ -217,7 +217,7 @@ class T_CNN(object):
 
             loss[ep]=np.mean(err_test)
             print(loss)
-            self.save(config.checkpoint_dir, counter)
+            self.save(config.checkpoint_dir[0], counter)
 
 
       
