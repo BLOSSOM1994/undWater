@@ -33,8 +33,23 @@ def main(_):
                   checkpoint_dir=checkpoint_dir,
                   sample_dir=sample_dir
                   )
+    import pandas as pd
+    a=pd.DataFrame()
+    a["epoch"]=[10]
+    a["batch_size"]=[16]
+    a["image_height"] = [ 112]
+    a["image_width"] = [ 112]
+    a["label_height"] = [ 112]
+    a["label_width"] = [ 112]
+    a["learning_rate"] = [ 0.001]
+    a["beta1"] = [ 0.5]
+    a["c_dim"] = [ 3]
+    a["checkpoint_dir"] = [ '/content/drive/MyDrive/DataSet_WaterNet/checkpoint']
+    a["sample_dir"] = [ '/content/drive/MyDrive/DataSet_WaterNet/challenging-60']
+    a["test_data_dir"] = [ "/content/drive/MyDrive/waternetDataSets/output"]
+    a["is_train"] = [ True]
 
-    srcnn.train()
+    srcnn.train(a)
     
 if __name__ == '__main__':
   tf.app.run()
