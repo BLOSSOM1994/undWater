@@ -216,7 +216,7 @@ class T_CNN(object):
 
 
               err_test[idx_test] = self.sess.run(self.loss, feed_dict={self.images: sample_inputs_data, self.images_wb: sample_inputs_wb_image, self.images_ce: sample_inputs_ce_image, self.images_gc: sample_inputs_gc_image,self.labels_image:sample_inputs_lable_image})    
-            print('----------99999999999999----------')
+
             loss[ep]=np.mean(err_test)
             print(loss)
             self.save(config.checkpoint_dir[0], counter)
