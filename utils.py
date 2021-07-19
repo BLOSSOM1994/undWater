@@ -7,7 +7,7 @@ import glob
 import h5py
 import random
 import matplotlib.pyplot as plt
-
+import cv2
 from PIL import Image  # for loading images as YCbCr format
 import scipy.misc
 import scipy.ndimage
@@ -42,15 +42,15 @@ def imread(path, is_grayscale=False):
   """
 
   if is_grayscale:
-    return scipy.misc.imread(path, flatten=True).astype(np.float)
+    return cv2.imread(path, flatten=True).astype(np.float)
   else:
-    return scipy.misc.imread(path).astype(np.float)
+    return cv2.imread(path).astype(np.float)
 
     
 def imsave(image, path):
 
   imsaved = (inverse_transform(image)).astype(np.float)
-  return scipy.misc.imsave(path, imsaved)
+  return cv2.imsave(path, imsaved)
 
 def get_image(image_path,is_grayscale=False):
   image = imread(image_path, is_grayscale)
@@ -59,4 +59,4 @@ def get_lable(image_path,is_grayscale=False):
   image = imread(image_path, is_grayscale)
   return image/255.
 def imsave_lable(image, path):
-  return scipy.misc.imsave(path, image*255)
+  return cv2.imsave(path, image*255)
