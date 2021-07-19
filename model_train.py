@@ -152,7 +152,7 @@ class T_CNN(object):
           batch_files_gc       = data_gc_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
           batch_image_files = image_train_list[idx*config.batch_size[0] : (idx+1)*config.batch_size[0]]
 
-
+          print('------------------------')
           batch_ = [
           get_image(batch_file,
                     is_grayscale=self.is_grayscale) for batch_file in batch_files]
@@ -178,15 +178,17 @@ class T_CNN(object):
           counter += 1
           _, err = self.sess.run([self.train_op, self.loss ], feed_dict={self.images: batch_input, self.images_wb: batch_wb_input, self.images_ce: batch_ce_input, self.images_gc: batch_gc_input, self.labels_image:batch_image_input})
           # print(batch_light)
-
+          print('-----------+-+-+-----------')
           if counter % 100 == 0:
             print("Epoch: [%2d], step: [%2d], time: [%4.4f], loss: [%.8f]" \
               % ((ep+1), counter, time.time()-start_time, err ))
-            
+          print('-----------+-+-+-----------')
+  
           if idx  == batch_idxs-1: 
             batch_test_idxs = len(data_test_list) // config.batch_size
             err_test =  np.ones(batch_test_idxs)
             for idx_test in range(0,batch_test_idxs):
+              print('-----------+-+-+-----------')
 
               sample_data_files = data_train_list[idx_test*config.batch_size[0]:(idx_test+1)*config.batch_size[0]]
               sample_wb_files = data_wb_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
@@ -214,7 +216,7 @@ class T_CNN(object):
 
 
               err_test[idx_test] = self.sess.run(self.loss, feed_dict={self.images: sample_inputs_data, self.images_wb: sample_inputs_wb_image, self.images_ce: sample_inputs_ce_image, self.images_gc: sample_inputs_gc_image,self.labels_image:sample_inputs_lable_image})    
-
+            print('----------99999999999999----------')
             loss[ep]=np.mean(err_test)
             print(loss)
             self.save(config.checkpoint_dir[0], counter)
