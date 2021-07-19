@@ -28,7 +28,7 @@ def main(_):
                   image_width=112, 
                   label_height=112, 
                   label_width=112, 
-                  batch_size=16,
+                  batch_size=400,
                   c_dim=3, 
                   checkpoint_dir=checkpoint_dir,
                   sample_dir=sample_dir
