@@ -35,7 +35,7 @@ def main(_):
                   )
     import pandas as pd
     a=pd.DataFrame()
-    a["epoch"]=[400]
+    a["epoch"]=[4]
     a["batch_size"]=[16]
     a["image_height"] = [ 112]
     a["image_width"] = [ 112]
