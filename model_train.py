@@ -177,7 +177,7 @@ class T_CNN(object):
           batch_image_input = np.array(batch_labels_image).astype(np.float32)
 
           counter += 1
-          err[idx] = self.sess.run([self.train_op, self.loss ], feed_dict={self.images: batch_input, self.images_wb: batch_wb_input, self.images_ce: batch_ce_input, self.images_gc: batch_gc_input, self.labels_image:batch_image_input})
+          #err[idx] = self.sess.run([self.train_op, self.loss ], feed_dict={self.images: batch_input, self.images_wb: batch_wb_input, self.images_ce: batch_ce_input, self.images_gc: batch_gc_input, self.labels_image:batch_image_input})
           # print(batch_light)
           if counter % 100 == 0:
             print("Epoch: [%2d], step: [%2d], time: [%4.4f], loss: [%.8f]" \
