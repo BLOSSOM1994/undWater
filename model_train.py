@@ -182,13 +182,13 @@ class T_CNN(object):
           if counter % 100 == 0:
             print("Epoch: [%2d], step: [%2d], time: [%4.4f], loss: [%.8f]" \
               % ((ep+1), counter, time.time()-start_time, err ))
-          print('-----------+-+-+-----------')
+          print('-----------777777777-----------')
   
           if idx  == batch_idxs-1: 
             batch_test_idxs = len(data_test_list) // config.batch_size
             err_test =  np.ones(batch_test_idxs)
             for idx_test in range(0,batch_test_idxs):
-              print('-----------+-+-+-----------')
+              print('-----------888888888-----------')
 
               sample_data_files = data_train_list[idx_test*config.batch_size[0]:(idx_test+1)*config.batch_size[0]]
               sample_wb_files = data_wb_train_list[idx_test*config.batch_size[0] : (idx_test+1)*config.batch_size[0]]
