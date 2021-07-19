@@ -152,7 +152,7 @@ class T_CNN(object):
           batch_files_gc       = data_gc_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
           batch_image_files = image_train_list[idx*config.batch_size[0] : (idx+1)*config.batch_size[0]]
 
-          print('------------------------')
+          print('------------------------',idx)
           batch_ = [
           get_image(batch_file,
                     is_grayscale=self.is_grayscale) for batch_file in batch_files]
