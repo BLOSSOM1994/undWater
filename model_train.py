@@ -145,6 +145,7 @@ class T_CNN(object):
         
         batch_idxs = len(data_train_list) // config.batch_size[0]
         print(batch_idxs)
+        print(len(data_train_list))
         for idx in range(0, batch_idxs):
 
           batch_files       = data_train_list[idx*config.batch_size[0]:(idx+1)*config.batch_size[0]]
