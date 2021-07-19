@@ -28,14 +28,14 @@ def main(_):
                   image_width=112, 
                   label_height=112, 
                   label_width=112, 
-                  batch_size=400,
+                  batch_size=16,
                   c_dim=3, 
                   checkpoint_dir=checkpoint_dir,
                   sample_dir=sample_dir
                   )
     import pandas as pd
     a=pd.DataFrame()
-    a["epoch"]=[10]
+    a["epoch"]=[400]
     a["batch_size"]=[16]
     a["image_height"] = [ 112]
     a["image_width"] = [ 112]
