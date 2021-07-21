@@ -2,7 +2,7 @@
 ## Project: https://li-chongyi.github.io/proj_benchmark.html 
 ############################################################################################################################################################################
 
-from model_train import T_CNN
+from model import T_CNN
 from utils import *
 import numpy as np
 import tensorflow as tf
