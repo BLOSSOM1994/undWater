@@ -34,27 +34,27 @@ def main(_):
 
 
 
-  if not os.path.exists(FLAGS.checkpoint_dir):
-    os.makedirs(FLAGS.checkpoint_dir)
-  if not os.path.exists(FLAGS.sample_dir):
-    os.makedirs(FLAGS.sample_dir)
-  filenames = os.listdir('/content/drive/MyDrive/DataSet_WaterNet/test_real')
-  data_dir = os.path.join(os.getcwd(), '/content/drive/MyDrive/DataSet_WaterNet/test_real')
+  if not os.path.exists(FLAGS.checkpoint_dir[0]):
+    os.makedirs(FLAGS.checkpoint_dir[0])
+  if not os.path.exists(FLAGS.sample_dir[0]):
+    os.makedirs(FLAGS.sample_dir[0])
+  filenames = os.listdir('/content/drive/MyDrive/Water-Net_Code-master/test_real')
+  data_dir = os.path.join(os.getcwd(), '/content/drive/MyDrive/Water-Net_Code-master/test_real')
   data = glob.glob(os.path.join(data_dir, "*.png"))
   test_data_list = data + glob.glob(os.path.join(data_dir, "*.jpg"))+glob.glob(os.path.join(data_dir, "*.bmp"))+glob.glob(os.path.join(data_dir, "*.jpeg"))
 
   filenames1 = os.listdir('/content/drive/MyDrive/DataSet_WaterNet/wb_real')
-  data_dir1 = os.path.join(os.getcwd(), '/content/drive/MyDrive/DataSet_WaterNet/wb_real')
+  data_dir1 = os.path.join(os.getcwd(), '/content/drive/MyDrive/Water-Net_Code-master/wb_real')
   data1 = glob.glob(os.path.join(data_dir1, "*.png"))
   test_data_list1 = data1 + glob.glob(os.path.join(data_dir1, "*.jpg"))+glob.glob(os.path.join(data_dir1, "*.bmp"))+glob.glob(os.path.join(data_dir1, "*.jpeg"))
 
   filenames2 = os.listdir('/content/drive/MyDrive/DataSet_WaterNet/ce_real')
-  data_dir2 = os.path.join(os.getcwd(), '/content/drive/MyDrive/DataSet_WaterNet/ce_real')
+  data_dir2 = os.path.join(os.getcwd(), '/content/drive/MyDrive/Water-Net_Code-master/ce_real')
   data2 = glob.glob(os.path.join(data_dir2, "*.png"))
   test_data_list2 = data2 + glob.glob(os.path.join(data_dir2, "*.jpg"))+glob.glob(os.path.join(data_dir2, "*.bmp"))+glob.glob(os.path.join(data_dir2, "*.jpeg"))
 
-  filenames3 = os.listdir('/content/drive/MyDrive/DataSet_WaterNet/gc_real')
-  data_dir3 = os.path.join(os.getcwd(), '/content/drive/MyDrive/DataSet_WaterNet/gc_real')
+  filenames3 = os.listdir('/content/drive/MyDrive/Water-Net_Code-master/gc_real')
+  data_dir3 = os.path.join(os.getcwd(), '/content/drive/MyDrive/Water-Net_Code-master/gc_real')
   data3 = glob.glob(os.path.join(data_dir3, "*.png"))
   test_data_list3 = data3 + glob.glob(os.path.join(data_dir3, "*.jpg"))+glob.glob(os.path.join(data_dir3, "*.bmp"))+glob.glob(os.path.join(data_dir3, "*.jpeg"))
 
@@ -70,13 +70,13 @@ def main(_):
         srcnn = T_CNN(sess, 
                   image_height=shape[0],
                   image_width=shape[1],  
-                  label_height=FLAGS.label_height, 
-                  label_width=FLAGS.label_width, 
-                  batch_size=FLAGS.batch_size,
-                  c_dim=FLAGS.c_dim, 
-                  c_depth_dim=FLAGS.c_depth_dim,
-                  checkpoint_dir=FLAGS.checkpoint_dir,
-                  sample_dir=FLAGS.sample_dir,
+                  label_height=FLAGS.label_height[0], 
+                  label_width=FLAGS.label_width[0], 
+                  batch_size=FLAGS.batch_size[0],
+                  c_dim=FLAGS.c_dim[0], 
+                  c_depth_dim=FLAGS.c_depth_dim[0],
+                  checkpoint_dir=FLAGS.checkpoint_dir[0],
+                  sample_dir=FLAGS.sample_dir[0],
                   test_image_name = test_data_list[ide],
                   test_wb_name = test_data_list1[ide],
                   test_ce_name = test_data_list2[ide],
