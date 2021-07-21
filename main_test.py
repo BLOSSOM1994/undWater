@@ -43,12 +43,12 @@ def main(_):
   data = glob.glob(os.path.join(data_dir, "*.png"))
   test_data_list = data + glob.glob(os.path.join(data_dir, "*.jpg"))+glob.glob(os.path.join(data_dir, "*.bmp"))+glob.glob(os.path.join(data_dir, "*.jpeg"))
 
-  filenames1 = os.listdir('/content/drive/MyDrive/DataSet_WaterNet/wb_real')
+  filenames1 = os.listdir('/content/drive/MyDrive/Water-Net_Code-master/wb_real')
   data_dir1 = os.path.join(os.getcwd(), '/content/drive/MyDrive/Water-Net_Code-master/wb_real')
   data1 = glob.glob(os.path.join(data_dir1, "*.png"))
   test_data_list1 = data1 + glob.glob(os.path.join(data_dir1, "*.jpg"))+glob.glob(os.path.join(data_dir1, "*.bmp"))+glob.glob(os.path.join(data_dir1, "*.jpeg"))
 
-  filenames2 = os.listdir('/content/drive/MyDrive/DataSet_WaterNet/ce_real')
+  filenames2 = os.listdir('/content/drive/MyDrive/Water-Net_Code-master/ce_real')
   data_dir2 = os.path.join(os.getcwd(), '/content/drive/MyDrive/Water-Net_Code-master/ce_real')
   data2 = glob.glob(os.path.join(data_dir2, "*.png"))
   test_data_list2 = data2 + glob.glob(os.path.join(data_dir2, "*.jpg"))+glob.glob(os.path.join(data_dir2, "*.bmp"))+glob.glob(os.path.join(data_dir2, "*.jpeg"))
