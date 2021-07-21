@@ -29,6 +29,7 @@ def main(_):
   FLAGS["sample_dir"] = [ '/content/drive/MyDrive/DataSet_WaterNet/challenging-60']
   FLAGS["test_data_dir"] = [ "/content/drive/MyDrive/DataSet_WaterNet/output"]
   FLAGS["is_train"] = [ False]
+  FLAGS["c_depth_dim"]=[1]
 
 
 
